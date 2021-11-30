@@ -1,0 +1,457 @@
+use universidade;
+use empresa;
+use univ_fabio;
+use mistura;
+
+/* CREATE DATABASE */
+
+CREATE DATABASE empresa;
+
+
+
+CREATE DATABASE mistura;
+
+/* mistura: */
+
+CREATE TABLE Produto (
+	id_produto int PRIMARY KEY PRIMARY KEY,
+    cod_produto varchar (4),
+    nome VARCHAR (50),
+    categoria ENUM ('suco','Tapioca','Crepioca') not null,
+    valor_custo float (5,2),
+    valor_venda float (5,2),
+    data_cadastro date,
+    ativo int
+    
+);
+
+CREATE TABLE Itens_do_Produto (
+    id_item INT PRIMARY KEY PRIMARY KEY,
+    nome_item varchar (50),
+    tipo ENUM ('Un','Litro','Grama') not null,
+    qtde varchar (2)
+);
+
+CREATE TABLE tem (
+	
+    fk_Produto_id_produto int,
+    fk_Itens_do_Produto_id_item int
+);
+ 
+ALTER TABLE tem ADD CONSTRAINT FK_tem_1
+    FOREIGN KEY (fk_Produto_id_produto)
+    REFERENCES Produto (id_produto)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE tem ADD CONSTRAINT FK_tem_2
+    FOREIGN KEY (fk_Itens_do_Produto_id_item)
+    REFERENCES Itens_do_Produto (id_item)
+    ON DELETE RESTRICT;
+
+insert into produto (id_produto, cod_produto, nome, categoria, valor_custo, valor_venda, data_cadastro, ativo) 
+value (1,1,'Tapioca Salgada Ovo Com Queijo','Tapioca','15,00','18,00','2021-11-22',1);
+
+insert into produto (id_produto, cod_produto, nome, categoria, valor_custo, valor_venda, data_cadastro, ativo) 
+value (3,3,'Tapioca Salgada de Presunto e Queijo','Tapioca','16,00','20,00','2021-11-22',1);
+
+insert into produto (id_produto, cod_produto, nome, categoria, valor_custo, valor_venda, data_cadastro, ativo) 
+value (2,2,'Suca de Laranja','Suco','2,00','5,00','2021-11-22',1);
+
+insert into produto (id_produto, cod_produto, nome, categoria, valor_custo, valor_venda, data_cadastro, ativo) 
+value (4,4,'Tapioca Salgada de Frango Cremoso','Tapioca','20,00','25,00','2021-11-22',1);
+
+insert into produto (id_produto, cod_produto, nome, categoria, valor_custo, valor_venda, data_cadastro, ativo) 
+value (5,5,'Suco de Laranja e Morango','Suco','5,00','7,00','2021-11-22',1);
+
+insert into produto (id_produto, cod_produto, nome, categoria, valor_custo, valor_venda, data_cadastro, ativo) 
+value (6,6,'Suco de Abacaxi','Suco','7,00','10,00','2021-11-22',1);
+
+insert into produto (id_produto, cod_produto, nome, categoria, valor_custo, valor_venda, data_cadastro, ativo) 
+value (7,7,'Suco de Abacaxi e hortelã','Suco','7,00','10,00','2021-11-22',1);
+
+
+
+insert into itens_do_produto (id_item, nome_item, tipo, qtde, fk_Itens_do_Produto_id_item) 
+value (1,'Tapioca','Grama',70, 1);
+
+insert into itens_do_produto (id_item, nome_item, tipo, qtde, fk_Itens_do_Produto_id_item) 
+value (2,'Ovo','Un',1, 1);
+
+insert into itens_do_produto (id_item, nome_item, tipo, qtde, fk_Itens_do_Produto_id_item) 
+value (3,'Queijo','Grama',70, 1);
+
+insert into itens_do_produto (id_item, nome_item, tipo, qtde, fk_Itens_do_Produto_id_item) 
+value (4,'Presunto','Grama',60, 3);
+
+insert into itens_do_produto (id_item, nome_item, tipo, qtde, fk_Itens_do_Produto_id_item) 
+value (5,'Queijo','Grama',70, 3);
+
+insert into itens_do_produto (id_item, nome_item, tipo, qtde, fk_Itens_do_Produto_id_item) 
+value (6,'Frango','Grama',30, 4);
+
+insert into itens_do_produto (id_item, nome_item, tipo, qtde, fk_Itens_do_Produto_id_item) 
+value (7,'Queijo','Grama',70, 4);
+
+insert into itens_do_produto (id_item, nome_item, tipo, qtde, fk_Itens_do_Produto_id_item) 
+value (8,'Catupiri','Grama',70, 4);
+
+insert into itens_do_produto (id_item, nome_item, tipo, qtde, fk_Itens_do_Produto_id_item) 
+value (9,'Laranjai','Un',1, 2);
+
+insert into itens_do_produto (id_item, nome_item, tipo, qtde, fk_Itens_do_Produto_id_item) 
+value (10,'Laranjai','Un',1, 5);
+
+insert into itens_do_produto (id_item, nome_item, tipo, qtde, fk_Itens_do_Produto_id_item) 
+value (11,'Morango','Grama',50, 5);
+
+insert into itens_do_produto (id_item, nome_item, tipo, qtde, fk_Itens_do_Produto_id_item) 
+value (12,'Abacaxi','Grama',100, 6);
+
+insert into itens_do_produto (id_item, nome_item, tipo, qtde, fk_Itens_do_Produto_id_item) 
+value (13,'Hortelã','Grama',100, 7);
+
+insert into itens_do_produto (id_item, nome_item, tipo, qtde, fk_Itens_do_Produto_id_item) 
+value (14,'Abacaxi','Grama',100, 7);
+
+
+
+
+
+DELETE FROM produto WHERE id_produto = 1;
+
+DROP TABLE produto;
+
+ALTER TABLE produto add data_cadastro date;
+
+ALTER TABLE itens_do_produto add fk_Itens_do_Produto_id_item int;
+
+UPDATE itens_do_produto SET fk_Itens_do_Produto_id_item = 1  WHERE id_item= 1;
+
+UPDATE itens_do_produto SET fk_Itens_do_Produto_id_item = 1  WHERE id_item= 2;
+
+UPDATE itens_do_produto SET fk_Itens_do_Produto_id_item = 1  WHERE id_item= 3;
+
+SELECT * FROM itens_do_produto;
+SELECT * FROM produto;
+
+SELECT AVG (valor_venda) as media FROM produto;
+
+
+
+
+
+
+
+
+/* CREATE TABLE */
+
+CREATE TABLE Aluno (
+    id_aluno INT PRIMARY KEY,
+    nome VARCHAR(50),
+    ativo_sn INT,
+    idade INT,
+    dt_insrc_curso DATE,
+    sexo CHAR(1),
+    cpf VARCHAR(11),
+    vlr_pago FLOAT(5,2),
+    email VARCHAR(150),
+    telefone VARCHAR(20)
+);
+
+CREATE TABLE Telefone (
+    id_telefone int PRIMARY KEY,
+    numero varchar(20),
+    tipo enum('res','com','cel') not null,
+    fk_id_aluno int
+);
+
+CREATE TABLE Endereco (
+    id_endereco int PRIMARY KEY,
+    logradouro varchar(120),
+    numero int,
+    bairro varchar(50),
+    cidade varchar(50),
+    estado varchar(25),
+    complemento varchar(50),
+    fk_id_alluno int
+);
+
+CREATE TABLE Funcionario (
+	id_funcionario int PRIMARY KEY,
+    nome VARCHAR(50),
+    funcao VARCHAR(20),
+    ativo_sn INT,
+    dt_nascimento DATE,
+    endereco VARCHAR(50),
+    bairro VARCHAR(20),
+    cidade VARCHAR(20),
+    uf VARCHAR(2),
+    sexo CHAR(1),
+    cpf VARCHAR(11),
+    email VARCHAR(150),
+    telefone VARCHAR(20)
+);
+
+CREATE TABLE Curso (
+    id_curso int PRIMARY KEY,
+    descricao varchar(50)
+);
+
+CREATE TABLE Aluno_curso (
+    id_aluno_curso int PRIMARY KEY,
+    fk_id_aluno int,
+    fk_id_curso int
+);
+
+CREATE table aluno_curso (
+	id_aluno_curso int auto_increment primary KEY,
+	Fk_id_aluno INT,
+	Fk_id_curso INT
+    );
+    
+create table gasto(
+id_gasto int primary key auto_increment,
+ano int not null,
+tipo enum ('previsto','realizado') not null,
+jan float (10,2),
+fev float (10,2),
+mar float (10,2),
+abr float (10,2),
+mai float (10,2),
+jun float (10,2),
+jul float (10,2),
+ago float (10,2),
+`set` float (10,2),
+`out` float (10,2),
+nov float (10,2),
+dez float (10,2)
+);
+
+CREATE TABLE tem (
+    fk_Aluno_id_aluno int,
+    fk_Endereco_id_endereco int
+);
+
+ALTER TABLE Telefone ADD CONSTRAINT FK_Telefone_2
+    FOREIGN KEY (fk_id_aluno)
+    REFERENCES Aluno (id_aluno)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE Aluno_curso ADD CONSTRAINT FK_Aluno_curso_2
+    FOREIGN KEY (fk_id_aluno)
+    REFERENCES Aluno (id_aluno)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Aluno_curso ADD CONSTRAINT FK_Aluno_curso_3
+    FOREIGN KEY (fk_id_curso)
+    REFERENCES Curso (id_curso)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE tem ADD CONSTRAINT FK_tem
+    FOREIGN KEY (fk_id_aluno)
+    REFERENCES Aluno (id_aluno)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE tem ADD CONSTRAINT FK_tem_2
+    FOREIGN KEY (fk_Endereco_id_endereco)
+    REFERENCES Endereco (id_endereco)
+    ON DELETE RESTRICT;
+    
+alter table aluno_curso add constraint fk_aluno_curso
+foreign key (fk_id_aluno) references curso(id_curso);
+
+alter table aluno_curso add constraint fk_aluno_curso
+foreign key (fk_id_aluno) references curso(id_curso);
+
+alter table aluno_curso add constraint fk_aluno_curso
+foreign key (fk_id_aluno) references curso(id_curso);
+
+insert into aluno_curso(fk_id_aluno, fk_id_curso) values (2,3);
+insert into aluno_curso(fk_id_aluno, fk_id_curso) values (1,2);
+insert into aluno_curso(fk_id_aluno, fk_id_curso) values (3,3);
+
+CREATE table curso (
+	id_curso int auto_increment  primary KEY,
+    deccricao VARCHAR (50)
+    );
+
+/* ALTER TABLE INSERIR E EXCLUIR COLUNA */
+
+ALTER TABLE aluno add endereco  varchar(100);
+ALTER TABLE curso add descricao  varchar(50);
+ALTER TABLE curso drop deccricao;
+ALTER TABLE telefone drop tipo;
+ALTER TABLE telefone add tipo enum('com','res','cel');
+ALTER TABLE telefone add id_telefone int auto_increment primary KEY;
+ALTER TABLE aluno drop dt_insrc_curso;
+ALTER TABLE aluno ADD dt_inscr_curso date AFTER endereco;
+ALTER TABLE aluno drop vlr_pago;
+ALTER TABLE aluno add vlr_pago float(5.2);
+ALTER TABLE aluno modify id_aluno INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE aluno drop id_aluno;
+
+
+/* SELECT */
+
+SELECT * FROM aluno_curso;
+SELECT * FROM telefone;
+
+alter table telefone modify column numero varchar(20) not null;
+alter table telefone modify column fk_id_aluno int not null;
+
+
+select * from telefone where numero is null;
+
+desc telefone;
+
+SELECT * FROM gasto;
+SELECT * FROM aluno_curso;
+SELECT * FROM funcionario;
+SELECT telefone, nome, sexo FROM aluno;
+SELECT nome, telefone, email, sexo FROM aluno;
+SELECT nome, telefone, email, sexo FROM funcionario;
+SELECT * FROM aluno WHERE sexo ='F';
+SELECT * FROM aluno WHERE sexo ='M';
+SELECT * FROM aluno WHERE vlr_pago > '1200';
+SELECT * FROM aluno WHERE idade > 20;
+SELECT * FROM aluno WHERE sexo ='M' AND ativo_sn = 1;
+SELECT * FROM aluno WHERE sexo ='F' AND ativo_sn = 0;
+SELECT * FROM aluno WHERE sexo ='F' AND idade > 19;
+SELECT * FROM aluno WHERE idade BETWEEN 19 AND 50;
+SELECT * FROM aluno WHERE nome IN('Sandro Neri','Mayara Mortales');
+SELECT * FROM aluno WHERE nome NOT IN('Sandro Neri','Mayara Mortales','Fabio Neri');
+SELECT * FROM aluno WHERE nome = 'Sandro Neri' OR nome = 'Mayara Mortales';
+SELECT * FROM aluno WHERE nome LIKE 'S%';
+SELECT * FROM aluno WHERE nome LIKE '%a';
+SELECT * FROM aluno WHERE nome LIKE '%neri';
+SELECT * FROM aluno WHERE nome LIKE '%silva';
+SELECT * FROM aluno WHERE nome LIKE 'S%i';
+SELECT * FROM aluno ORDER BY nome;
+SELECT * FROM aluno ORDER BY nome asc, sexo desc;
+
+
+/* DELETE */
+
+DELETE FROM aluno WHERE ativo_sn = 0;
+DELETE FROM aluno WHERE idade in (15,30) OR sexo = 'F';
+
+/* UPDATE */
+
+UPDATE aluno SET ativo_sn = 0 WHERE nome='Fabio Neri';
+
+/* DESC */
+
+DESC aluno;
+DESC telefone;
+
+insert into telefone (numero, fk_id_aluno, tipo) values (null, null, null);
+
+/* INSERT INTO */
+
+insert into aluno(nome, ativo_sn, idade, sexo, cpf, email, telefone, endereco, dt_inscr_curso, vlr_pago) 
+value ('Sandro Neri',1,'35','M','12345678901','sandro@email.com','11 2323-5656','Rua Balbiani. 36 - Pitituba - SP','2021-06-30','1200.00');
+
+insert into aluno(nome, ativo_sn, idade, sexo, cpf, email, telefone, endereco, dt_inscr_curso, vlr_pago) 
+value ('Fabio Neri',1,'45','M','32145678902','fabioo@email.com','11 1212-4545','Rua Domenica Bolzon. 119 - Osasco - SP','2021-07-25','1800.00');
+
+insert into aluno(nome, ativo_sn, idade, sexo, cpf, email, telefone, endereco, dt_inscr_curso, vlr_pago) 
+value ('Eliane Silva',1,'20','F','32165478903','eliane@email.com','11 7878-8989','Rua Gen. Antonio. 459 - Ipiranga - SP','2021-01-01','2200.00');
+
+insert into aluno(nome, ativo_sn, idade, sexo, cpf, email, telefone, endereco, dt_inscr_curso, vlr_pago) 
+value ('Carol Spera',1,'22','F','21356478904','carol@email.com','13 8989-7878','R. Gen. Euclides de Figueiredo, 370 - Praia Grande - SP','2021-05-01','1000.00');
+
+insert into aluno(nome, ativo_sn, idade, sexo, cpf, email, telefone, endereco, dt_inscr_curso, vlr_pago) 
+value ('Gustavo Spera',1,'17','M','21356478904','guto@email.com','13 2525-8585','R. Gen. Euclides de Figueiredo, 100 - Praia Grande - SP','2021-04-09','3000.00');
+
+insert into aluno(nome, ativo_sn, idade, sexo, cpf, email, telefone, endereco, dt_inscr_curso, vlr_pago) 
+value ('Mayara Mortales',0,'19','F','31256479905','mayara@email.com','13 3535-9585','R. Gen. Euclides de Figueiredo, 50 - Praia Grande - SP','2021-02-21','2500.00');
+
+insert into aluno(nome, ativo_sn, idade, sexo, cpf, email, telefone, endereco, dt_inscr_curso, vlr_pago) 
+value ('Arthur Spera',0,'15','M','33356579906','arthur@email.com','19 9595-2525','R. Gen. Figueiredo, 99 - Riberao Preto - SP','2021-02-21','1900.00');
+
+insert into funcionario (nome, funcao, ativo_sn, dt_nascimento, endereco, bairro, cidade, uf, sexo, cpf, email, telefone) 
+value ('Arthur Spera','Entregador','1','1995-04-26','R. Gen. Figueiredo, 99','Mooca','Riberao Preto','SP','M','33356579906','arthur@email.com','19 9595-2525');
+
+insert into funcionario (nome, funcao, ativo_sn, dt_nascimento, endereco, bairro, cidade, uf, sexo, cpf, email, telefone) 
+value ('Barbara Spera','Programadora','0','1990-10-12','R. Ten. Alfredo Figueiredo, 399','Capelinha','Campinas','SP','F','35556325999','barbara@email.com','17 2295-28825');
+
+insert into funcionario (nome, funcao, ativo_sn, dt_nascimento, endereco, bairro, cidade, uf, sexo, cpf, email, telefone) 
+value ('Sandro Neri','Analista de Sistema','1','1980-12-22','Rua Balbiani. 36','Pirituba','Sao Paulo','SP','M','12345678901','sandro@email.com','11 2323-5656');
+
+insert into funcionario (nome, funcao, ativo_sn, dt_nascimento, endereco, bairro, cidade, uf, sexo, cpf, email, telefone) 
+value ('Fabio Neri','Estagiario','1','1985-06-29','Rua Domenica. 119','Ayrosa','Osasco','SP','M','12345678901','fabioo@email.com','11 1212-4545');
+
+INSERT INTO curso (id_curso, descricao)
+value ('2','HTML5');
+
+INSERT INTO curso (id_curso, descricao)
+value ('3','CSS3');
+
+INSERT INTO curso (id_curso, descricao)
+value ('4','EXCEL AVANCADO');
+
+INSERT INTO curso (id_curso, descricao)
+value ('5','C# .NET');
+
+INSERT INTO curso (id_curso, descricao)
+value ('1','JAVASCRIPT');
+
+
+
+/* TRABALHANDO COMUNIQUE */
+
+ALTER TABLE aluno add constraint uc_aluno_email unique(email);
+ALTER TABLE aluno add constraint uc_aluno_cpf unique(cpf);
+
+select * from curso;
+select * from gasto;
+
+delete from aluno where nome = 'Maria Lucia';
+UPDATE aluno SET cpf= 13365478959 WHERE nome='Gustavo Spera';
+
+
+INSERT INTO aluno (nome, ativo_sn, idade, sexo, cpf, email, telefone, endereco, dt_inscr_curso, vlr_pago)
+values ('Maria Lucia','0','44','F','12345678901','lucia@email.com','11 3333-5656','Rua Domenica Bolzon, 119 Osasco SP','2021-03-13','550.55');
+
+insert into gasto(ano, tipo, jan, fev, mar, abr, mai, jun, jul, ago, `set`, `out`, nov, dez) 
+values('2019', 'realizado', 17500, 17900, 19000, 25000, 19900, 30000, 18900, 11100, 2800, 16600, 10000, 117000);
+
+insert into gasto(ano, tipo, jan, fev, mar, abr, mai, jun, jul, ago, `set`, `out`, nov, dez) 
+values('2022', 'realizado', 30500, 29900, 7000, 22000, 9900, 11000, 15900, 12100, 52800, 10600, 65000, 88000);
+
+insert into gasto(ano, tipo, jan, fev, mar, abr, mai, jun, jul, ago, `set`, `out`, nov, dez) 
+values('2022', 'previsto', 17500, 17900, 19000, 25000, 19900, 30000, 18900, 11100, 2800, 16600, 10000, 117000);
+
+insert into gasto(ano, tipo, jan)values('2019', 'realizado', 18353.20);
+update gasto set fev = 17555.55 where id_gasto = 2;
+
+update gasto set mar = 19435.73 where id_gasto = 2;
+update gasto set abr = 22753.12 where id_gasto = 2;
+update gasto set mai = 16198.12 where id_gasto = 2;
+update gasto set jun = 17451.88 where id_gasto = 2;
+update gasto set jul = 18975.40 where id_gasto = 2;
+update gasto set ago = 19163.84 where id_gasto = 2;
+update gasto set `set` = 18132.56 where id_gasto = 2;
+update gasto set `out` = 17667.91 where id_gasto = 2;
+update gasto set nov = 17936.33 where id_gasto = 2;
+update gasto set dez = 17125.88 where id_gasto = 2;
+
+/* tirando media do resultado */
+select (jan + fev + mar + abr + mai + jun + jul + ago + `set` + `out` + nov + dez) /12 as media
+from gasto where id_gasto = 2;
+
+/* formatando com truncate */
+select truncate (jan + fev + mar + abr + mai + jun + jul + ago + `set` + `out` + nov + dez) /12 as media
+from gasto where id_gasto = 2;
+
+select id_gasto from gasto where ano = 2019 and tipo = 'realizado';
+select id_gasto from gasto where ano = 2022 and tipo = 'previsto';
+select jan from gasto where id_gasto = (select id_gasto from gasto where ano = 2022 and tipo = 'previsto');
+select jan from gasto where id_gasto = (select id_gasto from gasto where ano = 2022 and tipo = 'realizado');
+
+select (select jan from gasto where id_gasto = (select id_gasto from gasto where ano = 2022 and tipo = 'realizado')) as realizado_jan,
+(select jan from gasto where id_gasto = (select id_gasto from gasto where ano = 2022 and tipo = 'previsto')) as previsto_jan,
+(select realizado_jan - previsto_jan) as subtracao;
+
+
+
