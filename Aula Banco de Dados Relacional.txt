@@ -453,5 +453,12 @@ select (select jan from gasto where id_gasto = (select id_gasto from gasto where
 (select jan from gasto where id_gasto = (select id_gasto from gasto where ano = 2022 and tipo = 'previsto')) as previsto_jan,
 (select realizado_jan - previsto_jan) as subtracao;
 
+select (select jan from gasto where id_gasto = (select id_gasto from gasto where ano = 2022 and tipo = 'realizado')) as realizado_jan,
+(select jan from gasto where id_gasto = (select id_gasto from gasto where ano = 2022 and tipo = 'previsto')) as previsto_jan,
+(select realizado_jan - previsto_jan) as resultado_janeiro;
+
+select (select jan from gasto where id_gasto = (select id_gasto from gasto where ano = 2022 and tipo = 'realizado')) - 
+(select jan from gasto where id_gasto = (select id_gasto from gasto where ano = 2022 and tipo = 'previsto'))  as resultado_janeiro;
+
 
 
